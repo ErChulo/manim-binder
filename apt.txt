@@ -1,5 +1,0 @@
-ffmpeg
-texlive-full
-libcairo2-dev
-librsvg2-dev
-libsox-dev
