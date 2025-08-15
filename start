@@ -1,2 +1,4 @@
 #!/bin/bash
-jupyter lab --ip=0.0.0.0 --allow-root > startup.log 2>&1
+# start script
+export JUPYTER_ENABLE_LAB=yes
+exec "$@"
