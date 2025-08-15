@@ -1,0 +1,11 @@
+ffmpeg
+texlive-latex-base
+texlive-latex-recommended
+texlive-latex-extra
+texlive-fonts-recommended
+libcairo2-dev
+librsvg2-dev
+libsox-dev
+pkg-config
+libpango1.0-dev
+libgirepository1.0-dev
