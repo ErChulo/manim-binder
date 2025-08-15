@@ -2,8 +2,7 @@
 FROM ubuntu:22.04
 
 # 1. Instala las dependencias del sistema necesarias
-# Esto incluye las bibliotecas de desarrollo para Cairo y Pango, ffmpeg,
-# y curl para poder descargar el script de NodeSource.
+# Esto incluye las bibliotecas de desarrollo para Manim, Node.js, y ahora Meson.
 RUN apt-get update && apt-get install -y --no-install-recommends \
     python3.10 \
     python3-pip \
@@ -19,7 +18,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libsm6 \
     libxext6 \
     libxrender-dev \
-    curl && \
+    curl \
+    meson && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
