@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -e
+python -m ipykernel install --user
+jupyter nbextension enable --py widgetsnbextension --sys-prefix
