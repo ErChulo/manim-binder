@@ -2,7 +2,7 @@
 FROM ubuntu:22.04
 
 # 1. Instala las dependencias del sistema necesarias
-# Esto incluye las bibliotecas de desarrollo para Manim, Node.js, y ahora Meson.
+# Incluye las bibliotecas de desarrollo, ffmpeg, y curl.
 RUN apt-get update && apt-get install -y --no-install-recommends \
     python3.10 \
     python3-pip \
@@ -18,27 +18,28 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libsm6 \
     libxext6 \
     libxrender-dev \
-    curl \
-    meson && \
+    curl && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
 # 2. Instala Node.js y npm
-# Ahora curl está disponible para este paso.
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
     apt-get install -y nodejs && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
 # 3. Configura el entorno de usuario
-# Crea un usuario 'manim' y establece el directorio de trabajo.
 RUN useradd -ms /bin/bash manim
 USER manim
 WORKDIR /home/manim
 
 # 4. Copia los archivos de requerimientos de Python
-# Asegúrate de tener un archivo 'requirements.txt' en la misma carpeta que el Dockerfile.
 COPY --chown=manim:manim requirements.txt .
 
-# 5. Instala las dependencias de Python desde el archivo
+# 5. Instala las dependencias de compilación con Python
+# Ahora instalamos Meson con pip para asegurar la versión correcta.
+RUN python3 -m pip install --no-cache-dir meson
+
+# 6. Instala las dependencias de Python desde el archivo
+# Este paso ahora tendrá la versión correcta de Meson disponible.
 RUN python3 -m pip install --no-cache-dir -r requirements.txt
