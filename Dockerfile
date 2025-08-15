@@ -2,7 +2,7 @@
 FROM ubuntu:22.04
 
 # 1. Instala las dependencias del sistema necesarias
-# Esto incluye las bibliotecas de desarrollo, ffmpeg, curl, pandoc, y ahora python3-cairo.
+# Incluye bibliotecas de desarrollo, ffmpeg, curl, pandoc, y ahora python3-dev.
 RUN apt-get update && apt-get install -y --no-install-recommends \
     python3.10 \
     python3-pip \
@@ -19,7 +19,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libxrender-dev \
     curl \
     pandoc \
-    python3-cairo && \
+    python3-cairo \
+    python3-dev && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
@@ -30,7 +31,6 @@ RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
     rm -rf /var/lib/apt/lists/*
 
 # 3. Instala las dependencias de compilación de Python a nivel del sistema
-# Se usa 'pip' con el usuario root para instalar 'meson' y 'ninja' globalmente.
 RUN python3 -m pip install --no-cache-dir meson ninja
 
 # 4. Configura el entorno de usuario
