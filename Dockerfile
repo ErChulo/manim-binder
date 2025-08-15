@@ -1,6 +1,8 @@
+# Usa una imagen base de Ubuntu
 FROM ubuntu:22.04
 
-# Instala las dependencias del sistema necesarias
+# 1. Instala las dependencias del sistema para Manim
+# Esto incluye las bibliotecas de desarrollo para Cairo y Pango
 RUN apt-get update && apt-get install -y --no-install-recommends \
     python3.10 \
     python3-pip \
@@ -10,6 +12,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     xdg-utils \
     build-essential \
     libcairo2-dev \
+    libpango1.0-dev \
     libsdl2-dev \
     libgl1-mesa-dev \
     libsm6 \
@@ -18,18 +21,21 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# Establece Python 3.10 como el predeterminado
-RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.10 1
+# 2. Instala Node.js y npm
+# Usamos el script oficial de NodeSource para obtener la última versión LTS
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
+    apt-get install -y nodejs && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
-# Establece el directorio de trabajo
-WORKDIR /home/manim
-
-# Crea un usuario
+# 3. Configura el entorno de usuario y el directorio de trabajo
+# Esto asegura que los paquetes de npm se instalen correctamente para el usuario 'manim'
 RUN useradd -ms /bin/bash manim
 USER manim
+WORKDIR /home/manim
 
-# Copia los archivos de requerimientos
+# 4. Copia los archivos de requerimientos
 COPY --chown=manim:manim requirements.txt .
 
-# Instala las dependencias de Python
+# 5. Instala las dependencias de Python
 RUN python3 -m pip install --no-cache-dir -r requirements.txt
