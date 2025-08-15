@@ -1,6 +1,6 @@
 # Manim Binder
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/YOUR_USERNAME/YOUR_REPO_NAME/HEAD)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/erchulo/manim-binder/HEAD)
 
 Un entorno completo de **Manim Community Edition** listo para usar en MyBinder.org.
 
