@@ -1,4 +1,0 @@
-#!/bin/bash
-# start script
-export JUPYTER_ENABLE_LAB=yes
-exec "$@"
