@@ -16,18 +16,3 @@ WORKDIR /home/jovyan
 USER manim
 
 # Do NOT set ENTRYPOINT/CMD
-
-
-# STEP 2 — Ensure postBuild exists at repo root (LF endings). EXACT:
-#!/usr/bin/env bash
-set -e
-python -m ipykernel install --user
-jupyter nbextension enable --py widgetsnbextension --sys-prefix || true
-
-
-# STEP 3 — Your notebooks must live under the repo (e.g., notebooks/demo.ipynb)
-
-# STEP 4 — Re-launch Binder with a cache-buster:
-# https://mybinder.org/v2/gh/<YOU>/<REPO>/HEAD?urlpath=lab&fresh=1
-
-
