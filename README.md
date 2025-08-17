@@ -1,19 +1,12 @@
-# Manim Binder
-
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/erchulo/manim-binder/HEAD)
-
-Un entorno de **Manim Community Edition** para usar en MyBinder.org.
-
-## Lanzar el entorno
-
-Haz clic en el botón de Binder arriba para lanzar el entorno interactivo.
-
-## ¿Qué incluye?
-
-- **Manim CE** - La biblioteca de animación matemática
-- **JupyterLab** - Interfaz de notebooks
-- **FFmpeg** - Para procesamiento de video
-- **Python 3.10** - Entorno optimizado
+# Manim CE on Binder
+#
+# Launch JupyterLab:
+# [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/<YOU>/<REPO>/HEAD?urlpath=lab)
+#
+# Launch classic Notebook:
+# https://mybinder.org/v2/gh/<YOU>/<REPO>/HEAD?urlpath=tree
+#
+# Open notebooks/demo.ipynb and run all cells.
 
 ## Uso básico
 
