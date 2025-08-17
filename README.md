@@ -3,11 +3,6 @@
 ## Launch JupyterLab:
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ErChulo/manim-binder/HEAD?urlpath=lab)
 
-## Launch classic Notebook:
-# https://mybinder.org/v2/gh/<YOU>/<REPO>/HEAD?urlpath=tree
-
-# Open notebooks/demo.ipynb and run all cells.
-
 ### Uso básico
 
 ```python
