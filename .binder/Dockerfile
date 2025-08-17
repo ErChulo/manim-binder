@@ -1,30 +1,29 @@
+# Use the official Manim CE base image
 FROM manimcommunity/manim:stable
 
-# Install TeX components (science and pictures) and other system deps
+# Install a full TeX Live distribution (includes actuarialsymbol, amsmath, tikz, etc.) and dvipng
 USER root
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    texlive-latex-extra \
-    texlive-latex-recommended \
-    texlive-fonts-recommended \
-    texlive-pictures \
-    texlive-science \
-    texlive-xetex \
+    texlive-full \
     dvipng && \
     rm -rf /var/lib/apt/lists/*
 
-# Install Jupyter components and MF‑Tools
+# Install Jupyter, widgets, and the MF‑Tools Python package
 RUN python3 -m pip install --no-cache-dir \
     notebook \
     jupyterlab \
     ipywidgets \
     MF-Tools
 
-# Copy repository into image and fix ownership
+# Copy your repository into the image and set correct ownership
 COPY --chown=manimuser:manimuser . /manim
 
-# Run as unprivileged user in Binder
+# Switch to the unprivileged user and set the working directory
 USER manimuser
 WORKDIR /manim
+
+# Note: Do not set CMD or ENTRYPOINT; Binder will inject its own startup command
+
 
 
 
