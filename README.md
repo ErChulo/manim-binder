@@ -21,6 +21,7 @@ class MiAnimacion(Scene):
 ```
 
 ```python
+%%manim -qm -v WARNING SquareToCircle
 from manim import *
 
 class ActuarialSymbolDemo(Scene):
