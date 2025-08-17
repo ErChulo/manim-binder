@@ -1,0 +1,19 @@
+from manim import *
+
+class ActuarialSymbolDemo(Scene):
+    def construct(self):
+        template = TexTemplate()
+        template.add_to_preamble(r"\usepackage{graphicx}")
+        template.add_to_preamble(r"\usepackage{actuarialsymbol}")
+
+        exprs = [
+            r"$\ax*{x:\angln}$",
+            r"$\ax**{x:\angln}$",
+            r"$\sx*{x:\angln}$",
+            r"$\sx**{x:\angln}$",
+        ]
+        symbols = [Tex(expr, tex_template=template, font_size=96) for expr in exprs]
+        group = VGroup(*symbols).arrange(DOWN, aligned_edge=LEFT)
+        self.play(*[Write(sym) for sym in symbols], lag_ratio=0.3)
+        self.play(group.animate.to_edge(LEFT))
+        self.wait()
