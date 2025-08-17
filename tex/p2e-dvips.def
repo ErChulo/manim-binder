@@ -1,0 +1,10 @@
+%% This is file `p2e-dvips.def'
+%% Generated from the pict2e sources (dvips option)
+\ProvidesFile{p2e-dvips.def}[2016/02/05 v0.1u Driver‑dependant file]
+\def\pIIe@mode{1}
+\def\pIIe@code#1{%
+  \Gin@PS@raw{save /setgray { pop } def}%
+  \Gin@PS@restored{#1}%
+  \Gin@PS@raw{restore}%
+}
+\endinput
