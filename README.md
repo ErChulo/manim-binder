@@ -168,6 +168,86 @@ class Demo_indexx_labels(Scene):
         self.add(indexx_labels(M1), indexx_labels(M2))
 ```
 
+## Para usar `actuarialsymbol`
+
+```python
+%%manim -qh -v WARNING ActuarialSymbolExplainer
+
+from manim import *
+
+from manim import *
+
+# 1. Define the custom TeX Template to include the actuarialsymbol package
+actuarial_template = TexTemplate(
+    preamble=r"""
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{actuarialsymbol}
+"""
+)
+
+class ActuarialSymbolExplainer(Scene):
+    def construct(self):
+        # We create the correctly formatted, full symbol as a single object.
+        full_symbol = MathTex(r"\qx[t]{x}", tex_template=actuarial_template).scale(3)
+
+        # Show the full formula first
+        self.play(Write(full_symbol))
+        self.wait(1)
+        # Move the formula up to make space for the explanation combo.
+        self.play(full_symbol.animate.shift(UP * 1.5))
+        self.wait(0.5)
+
+        # --- Explain each component one by one with a clear, sequential flow ---
+        
+        # 2. Explain 'q'
+        q_part = Tex(r"q", color=YELLOW, tex_template=actuarial_template).next_to(full_symbol, DOWN, buff=1.2).scale(1.5)
+        q_explanation = Tex(r"\textbf{q}: probability of death", color=YELLOW).next_to(q_part, DOWN)
+        
+        self.play(Write(q_part), Write(q_explanation))
+        self.wait(2.5)
+        self.play(FadeOut(q_part), FadeOut(q_explanation))
+
+        # 3. Explain 'x'
+        x_part = Tex(r"x", color=BLUE, tex_template=actuarial_template).next_to(full_symbol, DOWN, buff=1.2).scale(1.5)
+        x_explanation = Tex(r"\textbf{x}: attained age at the start", color=BLUE).next_to(x_part, DOWN)
+
+        self.play(Write(x_part), Write(x_explanation))
+        self.wait(2.5)
+        self.play(FadeOut(x_part), FadeOut(x_explanation))
+        
+        # 4. Explain 't'
+        t_part = Tex(r"t", color=GREEN, tex_template=actuarial_template).next_to(full_symbol, DOWN, buff=1.2).scale(1.5)
+        t_explanation = Tex(r"\textbf{t}: time period that has passed", color=GREEN).next_to(t_part, DOWN)
+        
+        self.play(Write(t_part), Write(t_explanation))
+        self.wait(2.5)
+        self.play(FadeOut(t_part), FadeOut(t_explanation))
+
+        # --- Show the final, combined meaning ---
+        final_text = VGroup(
+            Tex("The probability that a person aged ($x$)"),
+            Tex("will die within ($t$) years.")
+        ).arrange(DOWN, aligned_edge=LEFT).scale(0.9).next_to(full_symbol, DOWN, buff=0.7)
+
+        # Highlight the symbols in the final text
+        final_text[0].set_color_by_tex('($x$)', BLUE)
+        final_text[1].set_color_by_tex('($t$)', GREEN)
+
+        self.play(Write(final_text))
+        self.wait(5)
+        self.play(FadeOut(final_text, full_symbol))
+
+        # --- Add the identity: p + q = 1 ---
+        identity = MathTex(
+            r"\px[t]{x} + \qx[t]{x} = 1",
+            tex_template=actuarial_template
+        ).scale(2.5)
+
+        self.play(Write(identity))
+        self.wait(5)
+```
+
 ### Recursos
 
 - [Documentación oficial de Manim](https://docs.manim.community/)
