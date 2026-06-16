@@ -408,3 +408,44 @@ Do not commit:
 media/
 __pycache__/
 ```
+## Note
+
+`MF_Tools` appears to be the package you mean. PyPI lists it as **MF-Tools**, and its own install recommendation is `pip install MF_Tools`. It is a Manim utility package with tools such as `TransformByGlyphMap`. ([PyPI][1])
+
+To add it manually inside the `uv` project, run this from the project folder:
+
+```bash
+uv add MF_Tools
+```
+
+Then verify:
+
+```bash
+uv run python -c "import MF_Tools; print('MF_Tools installed')"
+```
+
+If the import name is different, inspect it with:
+
+```bash
+uv run python -c "import pkgutil; print([m.name for m in pkgutil.iter_modules() if 'mf' in m.name.lower()])"
+```
+
+No, I did **not** create a `requirements.txt` file. The starter scripts use the modern `uv` project files:
+
+```text
+pyproject.toml
+uv.lock
+```
+
+That is the correct native `uv` setup.
+
+If you still want a `requirements.txt`, generate it manually with:
+
+```bash
+uv export --format requirements.txt --output-file requirements.txt
+```
+
+The official `uv export` docs say it can export a project lockfile to `requirements.txt`, and `--output-file` writes it to a file. ([docs.astral.sh][2])
+
+[1]: https://pypi.org/project/MF-Tools/?utm_source=chatgpt.com "MF-Tools"
+[2]: https://docs.astral.sh/uv/concepts/projects/export/?utm_source=chatgpt.com "Exporting a lockfile | uv"
